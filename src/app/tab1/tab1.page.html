@@ -1,17 +1,64 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Add New Recipes </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Add New Recipes</ion-title>
     </ion-toolbar>
   </ion-header>
+  <form #recipeForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">Recipe Name</ion-label>
+      <ion-input
+        #recipename
+        autofocus="true"
+        name="recipeName"
+        required
+        ngModel
+      ></ion-input>
+    </ion-item>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <form #ingredientForm="ngForm">
+      <h3 class="ion-text-center">Add Ingredients:</h3>
+      <ion-item-group ngModelGroup="ingredient">
+        <ion-item>
+          <ion-label position="floating">Ingredient</ion-label>
+          <ion-input #ingredientName name="ingredientName" ngModel> </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Amount</ion-label>
+          <ion-input #amount name="amount" ngModel></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Unit of Measurement</ion-label>
+          <ion-select #unit [value]="units[0]" name="unit" ngModel>
+            <ion-select-option *ngFor="let unit of units">
+              {{unit}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button
+          type="submit"
+          expand="block"
+          (click)="addIngredient(ingredientName, amount, unit)"
+        >
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-item-group>
+    </form>
+    <h3 class="ion-text-center">Current Ingredients</h3>
+    <ion-list>
+      <ion-item *ngFor="let ingredient of ingredients">{{ingredient}}</ion-item>
+      <!-- Insert Ingredients as they are entered -->
+    </ion-list>
+  </form>
+  <ion-fab horizontal="center" vertical="bottom" slot="fixed">
+    <ion-fab-button type="submit">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
