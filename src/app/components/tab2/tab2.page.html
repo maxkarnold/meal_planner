@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Weekly Meals </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Weekly Meals</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list *ngIf="recipes?.length > 0; else noRecipes">
+    <ion-card *ngFor="let recipe of recipes" button="true">
+      <ion-card-header style="text-transform: capitalize">
+        <ion-card-title>{{recipe.recipeName}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Ingredients:
+        <ion-item *ngFor="let ingredient of recipe.ingredients"
+          >{{ingredient.amount}} {{ingredient.unit}}
+          {{ingredient.ingredientName}}</ion-item
+        >
+        <ion-button (click)="deleteRecipe($event, recipe)" slot="icon-only">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #noRecipes>
+    <hr />
+    <h5>No recipes in Firestore</h5>
+  </ng-template>
+</ion-content>

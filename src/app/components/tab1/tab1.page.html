@@ -10,7 +10,7 @@
       <ion-title size="large">Add New Recipes</ion-title>
     </ion-toolbar>
   </ion-header>
-  <form #recipeForm="ngForm">
+  <form #recipeForm="ngForm" (ngSubmit)="onSubmit(recipeForm)">
     <ion-item>
       <ion-label position="floating">Recipe Name</ion-label>
       <ion-input
@@ -18,7 +18,7 @@
         autofocus="true"
         name="recipeName"
         required
-        ngModel
+        [(ngModel)]="recipeName"
       ></ion-input>
     </ion-item>
 
@@ -41,13 +41,12 @@
             </ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button
-          type="submit"
-          expand="block"
-          (click)="addIngredient(ingredientName, amount, unit)"
-        >
-          <ion-icon name="add"></ion-icon>
+        <ion-button (click)="addIngredient(ingredientName, amount, unit)"
+          >Add Ingredient
         </ion-button>
+        <ion-button (click)="removeIngredient()"
+          >Remove Last Ingredient</ion-button
+        >
       </ion-item-group>
     </form>
     <h3 class="ion-text-center">Current Ingredients</h3>
@@ -55,10 +54,8 @@
       <ion-item *ngFor="let ingredient of ingredients">{{ingredient}}</ion-item>
       <!-- Insert Ingredients as they are entered -->
     </ion-list>
-  </form>
-  <ion-fab horizontal="center" vertical="bottom" slot="fixed">
-    <ion-fab-button type="submit">
+    <ion-button type="submit" expand="block">
       <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    </ion-button>
+  </form>
 </ion-content>
