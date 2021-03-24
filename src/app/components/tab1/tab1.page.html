@@ -18,8 +18,24 @@
         autofocus="true"
         name="recipeName"
         required
-        [(ngModel)]="recipeName"
+        ngModel
       ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Source</ion-label>
+      <ion-select name="source" ngModel>
+        <ion-select-option *ngFor="let source of sources">
+          {{source}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Page Number</ion-label>
+      <ion-input name="pageNumber" ngModel></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Number of Servings</ion-label>
+      <ion-input name="servings" ngModel></ion-input>
     </ion-item>
 
     <form #ingredientForm="ngForm">

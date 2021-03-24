@@ -16,6 +16,9 @@ export class Tab1Page {
         amount: 0,
       },
     ],
+    source: '',
+    pageNumber: 0,
+    servings: 0,
   };
   constructor(private firebase: FirebaseService) {}
 
@@ -25,6 +28,16 @@ export class Tab1Page {
     'fluid ounces (fl oz)',
     'cups',
     'custom (Not Yet Available)',
+  ];
+
+  sources = [
+    'Tasty Every Day',
+    'Tasty latest & greatest',
+    'Tasty Ultimate',
+    'Instapot Recipes',
+    'Online',
+    "Megan's Recipes",
+    'Other',
   ];
 
   ingredients: string[] = [];
@@ -42,7 +55,6 @@ export class Tab1Page {
     };
     this.ingredients.push(ingredient);
     this.ingredientObjs.push(ingredientObj);
-    console.log(this.ingredientObjs);
     name.value = '';
     amount.value = '';
     unit.value = '';
@@ -54,12 +66,13 @@ export class Tab1Page {
   }
 
   onSubmit(form: any) {
-    console.log(form.value.recipeName);
-    console.log(this.ingredientObjs);
     if (form.value.recipeName !== '' && this.ingredientObjs !== []) {
       this.recipe = {
         recipeName: form.value.recipeName,
         ingredients: this.ingredientObjs,
+        source: form.value.source,
+        pageNumber: form.value.pageNumber,
+        servings: form.value.servings,
       };
       this.firebase.createRecipe(this.recipe);
       alert(`Successfully added ${this.recipe.recipeName}!`);

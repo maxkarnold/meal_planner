@@ -15,6 +15,14 @@
     <ion-card *ngFor="let recipe of recipes" button="true">
       <ion-card-header style="text-transform: capitalize">
         <ion-card-title>{{recipe.recipeName}}</ion-card-title>
+        <ion-card-subtitle
+          *ngIf="recipe.pageNumber != 0 || recipe.pageNumber != ''; else noPageNumber"
+          >{{recipe.source}}: page {{recipe.pageNumber}}</ion-card-subtitle
+        >
+        <ng-template #noPageNumber
+          ><ion-card-subtitle>{{recipe.source}}</ion-card-subtitle></ng-template
+        >
+        <ion-card-subtitle>Serves {{recipe.servings}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         Ingredients:
@@ -22,7 +30,10 @@
           >{{ingredient.amount}} {{ingredient.unit}}
           {{ingredient.ingredientName}}</ion-item
         >
-        <ion-button (click)="deleteRecipe($event, recipe)" slot="icon-only">
+        <ion-button (click)="editRecipe($event, recipe)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteRecipe($event, recipe)" slot="end">
           <ion-icon name="trash-outline"></ion-icon>
         </ion-button>
       </ion-card-content>
