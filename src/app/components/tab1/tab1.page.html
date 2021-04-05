@@ -19,7 +19,8 @@
         name="recipeName"
         required
         ngModel
-      ></ion-input>
+      >
+      </ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Source</ion-label>
@@ -57,12 +58,12 @@
             </ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button (click)="addIngredient(ingredientName, amount, unit)"
-          >Add Ingredient
+        <ion-button (click)="addIngredient(ingredientName, amount, unit)">
+          Add Ingredient
         </ion-button>
-        <ion-button (click)="removeIngredient()"
-          >Remove Last Ingredient</ion-button
-        >
+        <ion-button (click)="removeIngredient()" color="danger">
+          Remove Last Ingredient
+        </ion-button>
       </ion-item-group>
     </form>
     <h3 class="ion-text-center">Current Ingredients</h3>

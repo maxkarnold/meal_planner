@@ -31,10 +31,14 @@
           {{ingredient.ingredientName}}</ion-item
         >
         <ion-button (click)="editRecipe($event, recipe)">
-          <ion-icon name="create-outline"></ion-icon>
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="deleteRecipe($event, recipe)" slot="end">
-          <ion-icon name="trash-outline"></ion-icon>
+        <ion-button
+          (click)="deleteRecipe($event, recipe)"
+          
+          color="danger"
+        >
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
         </ion-button>
       </ion-card-content>
     </ion-card>
