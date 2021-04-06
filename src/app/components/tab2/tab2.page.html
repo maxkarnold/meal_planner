@@ -16,13 +16,16 @@
       <ion-card-header style="text-transform: capitalize">
         <ion-card-title>{{recipe.recipeName}}</ion-card-title>
         <ion-card-subtitle
-          *ngIf="recipe.pageNumber != 0 || recipe.pageNumber != ''; else noPageNumber"
-          >{{recipe.source}}: page {{recipe.pageNumber}}</ion-card-subtitle
+          *ngIf="recipe.pageNumber !== undefined; else noPageNumber"
         >
-        <ng-template #noPageNumber
-          ><ion-card-subtitle>{{recipe.source}}</ion-card-subtitle></ng-template
+          {{recipe.source}}: page {{recipe.pageNumber}}
+        </ion-card-subtitle>
+        <ng-template #noPageNumber>
+          <ion-card-subtitle>{{recipe.source}}</ion-card-subtitle>
+        </ng-template>
+        <ion-card-subtitle *ngIf="recipe.servings !== undefined"
+          >Serves {{recipe.servings}}</ion-card-subtitle
         >
-        <ion-card-subtitle>Serves {{recipe.servings}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
         Ingredients:
@@ -33,11 +36,7 @@
         <ion-button (click)="editRecipe($event, recipe)">
           <ion-icon slot="icon-only" name="create-outline"></ion-icon>
         </ion-button>
-        <ion-button
-          (click)="deleteRecipe($event, recipe)"
-          
-          color="danger"
-        >
+        <ion-button (click)="deleteRecipe($event, recipe)" color="danger">
           <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
         </ion-button>
       </ion-card-content>
